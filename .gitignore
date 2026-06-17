@@ -1,0 +1,6 @@
+# Estado e segredos ficam fora do repo (vivem em /root/.<produto> na VPS)
+*.bak.*
+*.local
+.DS_Store
+__pycache__/
+*.pyc

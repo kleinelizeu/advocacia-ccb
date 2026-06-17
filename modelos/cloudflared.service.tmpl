@@ -1,0 +1,14 @@
+[Unit]
+Description=Cloudflare Tunnel para o webhook do __PRODUTO_NOME__ (porta __WEBHOOK_PORT__)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/cloudflared tunnel --no-autoupdate --url http://localhost:__WEBHOOK_PORT__ --logfile __TUNEL_LOG__
+Restart=always
+RestartSec=5
+User=root
+
+[Install]
+WantedBy=multi-user.target

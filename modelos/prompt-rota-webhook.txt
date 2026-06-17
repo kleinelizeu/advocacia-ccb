@@ -1,0 +1,13 @@
+Você recebeu um evento do Instagram (um comentário ou uma mensagem direta) através do Zernio.
+
+Dados completos do evento:
+{__raw__}
+
+Siga as regras do contexto de negócio que está salvo na sua memória.
+
+Importante:
+- Se for responder um COMENTÁRIO em público, primeiro descubra o post_id do post usando as ferramentas do Zernio (o post_id nem sempre vem no evento). Só depois use a ferramenta de resposta ao comentário.
+- Se for um lead quente (alguém com interesse de compra), responda em público de forma simpática e também envie uma DM personalizada, seguindo as regras do contexto.
+- Nunca repita a mesma mensagem para a mesma pessoa.
+
+Depois de agir, mande para o dono no Telegram um resumo curto do que você fez (quem comentou/mandou DM, o que era, e como você respondeu).

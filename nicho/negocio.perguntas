@@ -1,0 +1,53 @@
+# negocio.perguntas — Advocacia / escritório solo (triagem + agendamento, dentro dos limites da OAB).
+#
+# IMPORTANTE: as opções deste questionário respeitam o Código de Ética e o Provimento 205/2021
+# da OAB — comunicação informativa, sóbria e discreta. NÃO existe opção de divulgar honorários,
+# prometer resultado ou captar clientela. Honorários só são tratados em consulta reservada.
+
+[campo]
+placeholder = NOME_NEGOCIO
+valida = valida_nao_vazio
+texto = Qual o nome do seu escritório? (ex.: "Fulano de Tal Advocacia" ou "Escritório Fulano e Associados")
+
+[campo]
+placeholder = O_QUE_VENDE
+valida = valida_nao_vazio
+texto = Em uma ou duas frases: quais áreas do Direito você atua? (ex.: "direito de família, trabalhista e do consumidor")
+
+[campo]
+placeholder = CLIENTE_IDEAL
+valida = valida_nao_vazio
+texto = Quem você costuma atender? (ex.: "pessoas da minha cidade com questões de família e trabalhistas")
+
+[campo]
+placeholder = FAIXA_PRECO
+opcional = sim
+default = (honorários tratados apenas em consulta reservada)
+texto = Observação interna sobre honorários — NUNCA divulgada em público pelo agente (a OAB veda). Enter pula
+
+[campo]
+placeholder = INSTAGRAM_HANDLE
+tipo = instagram
+texto = Qual o @ do Instagram do escritório? (ex.: @meuescritorio)
+
+[menu]
+placeholder = TOM_DE_VOZ_DESCRICAO
+titulo = Como você gosta de se comunicar com quem entra em contato?
+texto = Escolha (1 a N):
+opcao = Sóbrio e institucional | Fale de forma sóbria e institucional: sério, discreto, sem informalidade, transmitindo credibilidade e respeito.
+opcao = Acolhedor e formal | Fale de forma acolhedora porém formal: gentil e tranquilizador, sem perder a seriedade e a postura profissional.
+opcao = Objetivo e técnico | Fale de forma objetiva e técnica: claro, direto e preciso, sem rodeios, mantendo a sobriedade.
+outro = sim
+
+[campo]
+placeholder = RESTRICOES
+opcional = sim
+default = Nunca divulgar honorários, tabelas ou promoções; nunca prometer ou garantir resultado de causa; nunca opinar sobre o caso concreto de alguém em público; nunca expor dados de cliente (sigilo profissional); jamais usar linguagem de captação ou de venda.
+texto = Algo que o agente NUNCA deve fazer ou dizer? (já incluímos as vedações da OAB; acrescente o que quiser) — Enter pula
+
+[menu]
+placeholder = REGRA_PRECO
+titulo = Quando alguém pergunta "quanto custa" ou quer saber valores, o que o agente deve fazer?
+texto = Escolha (1 a N):
+opcao = Explicar que honorários são tratados só em consulta e convidar a agendar | Sem citar nenhum valor, explique com sobriedade que os honorários só são definidos em uma consulta reservada, pois dependem da análise de cada caso, e convide a pessoa a agendar uma consulta no canal privado.
+opcao = Avisar você antes de qualquer retorno | Não trate de honorários nem agende sozinho: avise o responsável no Telegram com um resumo e aguarde antes de dar qualquer retorno à pessoa.

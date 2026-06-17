@@ -1,0 +1,5 @@
+Configure um servidor MCP chamado "zernio" com o seguinte comando:
+
+npx -y mcp-remote@latest https://mcp.zernio.com/mcp --header "Authorization: Bearer __API_KEY__"
+
+Depois de configurar, liste minhas ferramentas do Zernio para confirmar que conectou.
