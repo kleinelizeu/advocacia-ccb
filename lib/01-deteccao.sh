@@ -2,7 +2,7 @@
 # 01-deteccao.sh — Pré-checagens e detecção do ambiente Hermes.
 # Define: MODO (docker|nativo), CONTAINER/COMPOSE_DIR/CONFIG_FILE/WEBHOOK_PY etc.
 
-VERSAO_TESTADA="0.16"   # versão do Hermes em que o kit foi validado
+VERSOES_TESTADAS="0.15 0.16"   # versões major.minor do Hermes em que o kit foi validado
 
 # Garante que estamos como root (Hermes nativo vive em /root; Docker precisa de socket).
 checar_root() {
@@ -132,8 +132,10 @@ _checar_versao() {
   if [[ -n "$v" ]]; then
     salvar_var HERMES_VERSAO "$v"
     info "Versão do Hermes: $v"
-    if [[ "$v" != ${VERSAO_TESTADA}* ]]; then
-      dica "Este assistente foi testado na versão ${VERSAO_TESTADA}.x. A sua é diferente — pode haver pequenas diferenças."
+    local ok_ver="" t
+    for t in $VERSOES_TESTADAS; do [[ "$v" == "${t}"* ]] && ok_ver=1; done
+    if [[ -z "$ok_ver" ]]; then
+      dica "Este assistente foi testado nas versões ${VERSOES_TESTADAS}. A sua ($v) é diferente — pode haver pequenas diferenças."
       confirmar "Quer continuar mesmo assim?" s || { erro "Ok, parando aqui."; return 1; }
     fi
   else
