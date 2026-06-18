@@ -14,30 +14,38 @@ negócio com o e-mail do service account (Configurações da agenda → Comparti
 "Fazer alterações em eventos"). Funciona com Gmail pessoal. Sem token que expira → o
 agente agenda de forma autônoma, indefinidamente.
 
-Variáveis de ambiente:
-  GOOGLE_APPLICATION_CREDENTIALS = caminho do JSON do service account
-  GOOGLE_CALENDAR_ID             = id da agenda (e-mail) onde criar/listar eventos
+Credenciais (preferir ARGUMENTOS; env é fallback):
+  arg 1 = caminho do JSON do service account   (ou env GOOGLE_APPLICATION_CREDENTIALS)
+  arg 2 = id da agenda/e-mail onde criar/listar (ou env GOOGLE_CALENDAR_ID)
 
 Roda self-contained (o uv instala as deps via PEP 723):
-  uv run gcal_mcp.py
+  uv run gcal_mcp.py <caminho_do_sa.json> <calendar_id>
 Ferramentas expostas: consultar_disponibilidade, listar_eventos, criar_evento.
 """
 import os
+import sys
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
 from mcp.server.fastmcp import FastMCP
 
 SCOPES = ["https://www.googleapis.com/auth/calendar"]
-CAL_PADRAO = os.environ.get("GOOGLE_CALENDAR_ID", "primary")
+
+# Credenciais podem vir por ARGUMENTOS POSICIONAIS (1=caminho do SA, 2=id da agenda) OU por
+# variáveis de ambiente. Preferimos os argumentos porque alguns hosts MCP não propagam --env
+# ao subprocesso stdio — os argumentos são sempre passados.
+_ARG_SA = sys.argv[1] if len(sys.argv) > 1 else ""
+_ARG_CAL = sys.argv[2] if len(sys.argv) > 2 else ""
+CAL_PADRAO = _ARG_CAL or os.environ.get("GOOGLE_CALENDAR_ID", "primary")
 
 mcp = FastMCP("google-calendar-ccb")
 
 
 def _servico():
-    caminho = os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")
+    caminho = _ARG_SA or os.environ.get("GOOGLE_APPLICATION_CREDENTIALS", "")
     if not caminho or not os.path.exists(caminho):
         raise RuntimeError(
-            "GOOGLE_APPLICATION_CREDENTIALS não aponta para o JSON do service account."
+            "Caminho do service account não informado/inexistente "
+            "(arg 1 do conector ou GOOGLE_APPLICATION_CREDENTIALS)."
         )
     creds = service_account.Credentials.from_service_account_file(caminho, scopes=SCOPES)
     return build("calendar", "v3", credentials=creds, cache_discovery=False)

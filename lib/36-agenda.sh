@@ -84,9 +84,10 @@ _agenda_registrar_mcp() {
   [[ -f "$script" ]] || { erro "Conector da agenda não encontrado ($script)."; return 1; }
   if _agenda_mcp_registrado; then ok "Agenda já conectada ao agente."; return 0; fi
   info "Conectando a agenda ao agente (pode baixar dependências na 1ª vez)..."
-  # NÃO redirecionar stdin de /dev/null: o 'yes' responde ao prompt "Enable all tools?".
-  yes 2>/dev/null | hermes_cli mcp add gcal --command "$uv" --args run "$script" \
-       --env "GOOGLE_APPLICATION_CREDENTIALS=$GCAL_SA_PATH" --env "GOOGLE_CALENDAR_ID=$GCAL_ID" >/dev/null 2>&1 || true
+  # Credenciais vão como ARGUMENTOS POSICIONAIS (caminho do SA + id da agenda), não via --env:
+  # alguns hosts MCP não propagam --env ao subprocesso (validado na VPS). NÃO redirecionar
+  # stdin de /dev/null: o 'yes' responde ao prompt "Enable all tools?".
+  yes 2>/dev/null | hermes_cli mcp add gcal --command "$uv" --args run "$script" "$GCAL_SA_PATH" "$GCAL_ID" >/dev/null 2>&1 || true
   if _agenda_mcp_registrado; then
     _reiniciar_gateway
     ok "Agenda conectada! O agente agora marca os agendamentos sozinho."
