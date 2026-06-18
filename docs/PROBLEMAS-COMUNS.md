@@ -41,6 +41,13 @@ O assistente já deixa um ajuste que reaplica sozinho a cada reinício do contai
 ### "A resposta demora vários minutos"
 Depende do modelo de IA configurado no seu Hermes. Modelos gratuitos costumam ser mais lentos. Configure um modelo mais rápido no perfil.
 
+### "O agente diz que marcou, mas não aparece nada na agenda" / erro de permissão
+Quase sempre a agenda foi compartilhada com o robô **só como leitura**. Abra *calendar.google.com → Configurações e compartilhamento*, ache o e-mail do robô (`...iam.gserviceaccount.com`) e troque a permissão para **"Fazer alterações nos eventos"**.
+**Agenda de empresa (Google Workspace):** se esse campo estiver **bloqueado/cinza**, é a política do Workspace barrando edição por conta externa — use uma agenda de **Gmail pessoal** (sem a trava) ou libere em *admin.google.com → Apps → Google Workspace → Agenda → Opções de compartilhamento externo*. *(Sintoma técnico: erro 403 "writer access".)*
+
+### "O agente não consegue acessar a agenda / erro de credencial"
+Confira que você **compartilhou a agenda com o e-mail do robô** e que o JSON colado é o da conta de serviço certa. Rode `hermes-advocacia doctor` (ele reconecta) ou `hermes-advocacia` (passo da agenda).
+
 ---
 
 Se nada disso resolver, leve a saída do `hermes-advocacia doctor` para a comunidade.

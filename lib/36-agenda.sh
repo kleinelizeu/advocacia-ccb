@@ -22,6 +22,12 @@ passo_agenda() {
    6. No Google Agenda (calendar.google.com) -> Configurações da agenda ->
       "Compartilhar com pessoas/grupos específicos" -> adicione esse e-mail
       com a permissão  "Fazer alterações nos eventos".
+
+   * ATENCAO (agenda de EMPRESA / Google Workspace): se a permissão "Fazer alterações
+     nos eventos" aparecer BLOQUEADA/cinza, é a política do Workspace barrando edição
+     por conta externa. Saídas: use uma agenda de Gmail PESSOAL (não tem essa trava),
+     OU libere em admin.google.com -> Apps -> Google Workspace -> Agenda ->
+     "Opções de compartilhamento externo" -> permitir que pessoas de fora alterem.
 EOT
   echo
   _agenda_garantir_uv   || return 1
