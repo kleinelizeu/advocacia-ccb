@@ -15,6 +15,12 @@ passo_mcp() {
   # Tentativa automática (best-effort). O 'mcp add' do Hermes é "discovery-first"
   # e pode pedir confirmação; alimentamos 'yes' e, se não registrar, caímos no
   # caminho manual (comprovado) sem travar.
+  # NOTA (validado na VPS, Hermes 0.15.1): para o Zernio (MCP remoto com Bearer via
+  # mcp-remote), o 'mcp add' por CLI NÃO funciona de forma confiável — o '-y' e o
+  # '--header' quebram o argparse, e a forma --url/--auth também não registrou.
+  # O caminho COMPROVADO (igual ao case original) é o fallback manual abaixo: o aluno
+  # cola a mensagem no bot e o próprio agente configura o MCP. Mantemos a tentativa
+  # automática mesmo assim (custa pouco) e caímos no manual sem travar.
   if hermes_cli mcp --help 2>/dev/null | grep -q ' add'; then
     info "Tentando conectar o Zernio automaticamente..."
     # --args precisa ser a ÚLTIMA opção; o header vai como um único argumento.

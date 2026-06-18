@@ -31,6 +31,7 @@ Veja os roteiros completos em [docs/CASOS-DE-USO.md](docs/CASOS-DE-USO.md).
 2. O Hermes com um **modelo de IA configurado** (`hermes setup`).
 3. **Telegram** no celular.
 4. Uma conta no **Zernio** (zernio.com) com o **Instagram do escritório conectado**.
+5. Uma conta **Google** com uma agenda — o assistente te guia a conectar (via "conta de serviço") para o agente **marcar consultas sozinho** na sua Google Agenda.
 
 ## 5. Como instalar (1 comando)
 Conecte na sua VPS por SSH e cole:

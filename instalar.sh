@@ -66,6 +66,10 @@ executar_passo credenciais   "Coleta das suas credenciais"    passo_credenciais
 executar_passo negocio        "Configuração do seu negócio"    passo_negocio
 executar_passo perfil         "Criação do agente (perfil)"     passo_perfil
 executar_passo mcp            "Conexão com o Zernio (MCP)"     passo_mcp
+# Agenda (Google Calendar) — só nos produtos com AGENDA="google" (o agente marca sozinho).
+if [[ -n "${AGENDA:-}" ]]; then
+  executar_passo agenda       "Conexão com a agenda (Google Calendar)" passo_agenda
+fi
 executar_passo webhook        "Configuração das respostas automáticas" passo_webhook
 executar_passo exposicao      "Abertura segura para a internet" passo_exposicao
 executar_passo painel_zernio  "Instruções do painel do Zernio" passo_painel_zernio

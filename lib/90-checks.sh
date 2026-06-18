@@ -37,6 +37,11 @@ rodar_doctor() {
   check_post_assinado
   check_mcp
 
+  # Agenda (Google Calendar) — só quando AGENDA está ligada no produto.conf.
+  if [[ -n "${AGENDA:-}" ]] && declare -F check_agenda >/dev/null 2>&1; then
+    check_agenda
+  fi
+
   # Hook de checagens extras (squads). No-op se não existir.
   if declare -F checks_extra >/dev/null 2>&1; then
     checks_extra
